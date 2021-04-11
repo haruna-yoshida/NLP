@@ -1,0 +1,7 @@
+{
+    "python.pythonPath": "/Users/haruna/Desktop/NLP/.venv/bin/python",
+    "python.venvFolders":[
+        ".venv"
+    ],
+    "git.ignoreLimitWarning": true
+}

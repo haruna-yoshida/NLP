@@ -37,7 +37,7 @@ device = PDFPageAggregator(resource_manager, laparams=laparams)
 interpreter = PDFPageInterpreter(resource_manager, device)
 
 # 出力用のテキストファイル
-output_txt = open('output.txt', 'w')
+output_txt = open('201013.txt', 'w')
 
 def print_and_write(txt):
     print(txt)
@@ -45,6 +45,7 @@ def print_and_write(txt):
     output_txt.write('\n')
 
 with open(sys.argv[1], 'rb') as f:
+    
     # PDFPage.get_pages()にファイルオブジェクトを指定して、PDFPageオブジェクトを順に取得する。
     # 時間がかかるファイルは、キーワード引数pagenosで処理するページ番号（0始まり）のリストを指定するとよい。
     for page in PDFPage.get_pages(f):
