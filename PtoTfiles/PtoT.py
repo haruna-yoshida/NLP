@@ -7,6 +7,7 @@ from pdfminer.layout import LAParams, LTContainer, LTTextBox
 from pdfminer.pdfinterp import PDFPageInterpreter, PDFResourceManager
 from pdfminer.pdfpage import PDFPage
 
+
 # 現在の階層を確認
 print('getcwd:', os.getcwd())
 
@@ -15,8 +16,47 @@ files = glob.glob('**/*.pdf', recursive=True)
 
 #filesの1つ1つに関して処理を行う．
 for file in files:
-  with open(file,mode='r') as f: #fileを開く
-    print(file)
+
+  
+  def find_textboxes_recursively(layout_obj):
+    """
+    再帰的にテキストボックス（LTTextBox）を探して、テキストボックスのリストを取得する。
+    """
+    # LTTextBoxを継承するオブジェクトの場合は1要素のリストを返す。
+    if isinstance(layout_obj, LTTextBox):
+        return [layout_obj]
+
+    # LTContainerを継承するオブジェクトは子要素を含むので、再帰的に探す。
+    if isinstance(layout_obj, LTContainer):
+        boxes = []
+        for child in layout_obj:
+            boxes.extend(find_textboxes_recursively(child))
+
+        return boxes
+
+    return []  # その他の場合は空リストを返す。
+
+# Layout Analysisのパラメーターを設定。縦書きの検出を有効にする。
+laparams = LAParams(detect_vertical=True)
+
+# 共有のリソースを管理するリソースマネージャーを作成。
+resource_manager = PDFResourceManager()
+
+# ページを集めるPageAggregatorオブジェクトを作成。
+device = PDFPageAggregator(resource_manager, laparams=laparams)
+
+# Interpreterオブジェクトを作成。
+interpreter = PDFPageInterpreter(resource_manager, device)
+
+# 出力用のテキストファイル
+output_txt = open(file + '.txt', 'w')
+
+def print_and_write(txt):
+    print(txt)
+    output_txt.write(txt)
+    output_txt.write('\n')
+
+with open(file, 'rb') as f:
     
     # PDFPage.get_pages()にファイルオブジェクトを指定して、PDFPageオブジェクトを順に取得する。
     # 時間がかかるファイルは、キーワード引数pagenosで処理するページ番号（0始まり）のリストを指定するとよい。
@@ -35,5 +75,8 @@ for file in files:
         for box in boxes:
             print_and_write('-' * 10)  # 読みやすいよう区切り線を表示する。
             print_and_write(box.get_text().strip())  # テキストボックス内のテキストを表示する。
-    # 行う処理 今回はシンプルに内容の表示
-    print(f.read())
+
+output_txt.close()
+
+    # # 行う処理 今回はシンプルに内容の表示
+    # print(f.read())

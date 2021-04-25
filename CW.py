@@ -7,7 +7,7 @@ import pandas as pd
 import seaborn as sns
 
 #問題の取り込み
-f = open('/Users/haruna/Desktop/洗足算数/2010年/第3回/201013.txt')
+f = open('/Users/haruna/Desktop/洗足算数/2020年/第1回/202011.txt')
 text = f.read()  # ファイル終端まで全て読んだデータを返す
 f.close()
 

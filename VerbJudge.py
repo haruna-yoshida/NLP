@@ -37,7 +37,7 @@ device = PDFPageAggregator(resource_manager, laparams=laparams)
 interpreter = PDFPageInterpreter(resource_manager, device)
 
 # 出力用のテキストファイル
-output_txt = open('201013.txt', 'w')
+output_txt = open('202011.txt', 'w')
 
 def print_and_write(txt):
     print(txt)
