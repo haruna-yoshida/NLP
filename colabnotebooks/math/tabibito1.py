@@ -20,7 +20,6 @@ def sympy_function(a, b, c, d, A1, B1):
     equation1 = a * x + b * y - A1
     equation2 = c * x + d * y - B1 / 60
     X = solve([equation1, equation2])
-    print(type(X))
     Y = X[x] * a #速さ1で進んだ距離を出したい
     print(Y)
 
