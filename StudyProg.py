@@ -1,3 +1,4 @@
+# coding: utf-8
 # TODO 24行目()の中身をnounAndVerbにする
 
 import MeCab
