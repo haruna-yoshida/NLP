@@ -2,6 +2,11 @@ import Mecab
 import glob
 from sympy import solve, Symbol
 
+# 言語を日本語に設定
+wikipedia.set_lang("jp")
+# テキストファイルを開く
+f = open('wikipedia.txt', 'a')
+
 # filesに指定の階層のファイルを全て取得
 files = glob.glob('**/*.pdf.txt', recursive=True)
 
@@ -18,6 +23,7 @@ def main():
   sympy_function(a, b, c, d, A1, A2)
 
 def sympy_function(a, b, c, d, A1, A2):
+  a = Symbol
   x = Symbol('x')#人物1のお小遣い
   y = Symbol('y')#人物2のお小遣い
   equation1 = a * x + b * y - A1
