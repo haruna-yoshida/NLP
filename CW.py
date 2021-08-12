@@ -26,7 +26,7 @@ for file in files:
     words=[]
     while node:
         hinshi = node.feature.split(",")[0]
-        if hinshi in ["動詞"]:
+        if hinshi in ["一般"]:
             origin = node.feature.split(",")[6]
             words.append(origin)
         node = node.next
@@ -44,7 +44,7 @@ for file in files:
 
     line_plot = sns.lineplot()
     figure = line_plot.get_figure()
-    figure.savefig(file + '.png')
+    figure.savefig(file +"norm"+ '.png')
 
     print(words)
     plt.show()
